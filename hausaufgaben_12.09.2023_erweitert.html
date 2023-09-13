@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine erste AJAX-Anfrage</title>
+</head>
+<body>
+    <h1>Meine erste AJAX-Anfrage</h1>
+    <button id="fetchDataBtn">Daten abrufen</button>
+    <div id="result"></div>
+    <script>
+        // Event-Listener hinzufügen
+        document.getElementById("fetchDataBtn").addEventListener("click", fetchData);
+
+        // fetchData-Funktion erstellen
+        function fetchData() {
+            // Ein XMLHttpRequest-Objekt erstellen
+            var xhr = new XMLHttpRequest();
+
+            // GET-Anfrage an die "hausaufgaben_12.09.2023.html"-Datei senden
+            xhr.open("GET", "hausaufgaben_12.09.2023.html", true);
+
+            // Event-Handler für die Antwort festlegen
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) { // Überprüfen, ob die Anfrage abgeschlossen ist
+                    if (xhr.status === 200) { // Überprüfen, ob die Anfrage erfolgreich war
+                        // Antwort verarbeiten (HTML-Inhalt)
+                        document.getElementById("result").innerHTML = xhr.responseText;
+                    } else {
+                        // Fehlerbehandlung, wenn die Anfrage fehlschlägt
+                        document.getElementById("result").innerHTML = "Fehler beim Abrufen der Daten.";
+                    }
+                }
+            };
+
+            // Anfrage senden
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
